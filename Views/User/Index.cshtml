@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "Login/Register";
+    
+    try
+    {
+        Console.WriteLine(ViewBag.LoginError.Equals(null));
+        // Explanaton: Apparently, if the value of ViewBag.errors is null, you have to use
+        // the "==" operator to compare it or it will crash. But if it is NOT null, then you 
+        // have to use .Equals() to compare it, or it will crash. So... Here's my super-hacky
+        // solution to the problem. If it crashes on that line, well, then that means it
+        // is null, because if it WASN'T null, then it wouldn't have crashed.
+    }
+    catch(Exception e)
+    {
+        ViewBag.LoginError = "";
+    } 
+}
+@model DojoActivities.Models.ViewUser
+
+<h1>Welcome to the Dojo Activity Center</h1>
+
+<form action="/login" method="post">
+<h3>Login</h3>
+    <span class="field-validation-error">@ViewBag.LoginError</span>
+    <label for="email">Email: <input type="text" name="email"></label><br/>
+    <label for="password">Password: <input type="password" name="password"></label><br/>
+    <input type="Submit" value="Login">
+</form>
+
+<form asp-controller="User" asp-action="Register" method="post">
+    <h3>Register</h3>
+    <span asp-validation-for="FirstName"></span>
+    <label asp-for="FirstName">First Name: </label>
+    <input asp-for="FirstName"/><br/>
+    <span asp-validation-for="LastName"></span>
+    <label asp-for="LastName">Last Name: </label>
+    <input asp-for="LastName"/><br/>
+    <span asp-validation-for="Email"></span>
+    <label asp-for="Email">Email: </label>
+    <input asp-for="Email"/><br/>
+    <span asp-validation-for="Password"></span>
+    <label asp-for="Password">Password: </label>
+    <input asp-for="Password"/><br/>
+    <span asp-validation-for="PasswordConf"></span>
+    <label asp-for="PasswordConf">Confirm: </label>
+    <input asp-for="PasswordConf"/><br/>
+    <input type="submit" value="Register">
+</form>

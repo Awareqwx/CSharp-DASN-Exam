@@ -1,0 +1,23 @@
+form{
+    width: 300px;
+}
+input{
+    width: 170px;
+}
+select{
+    margin: 5px;
+}
+#Duration{
+    width: 87px;
+}
+#DurationType{
+    width: 50px;
+}
+input[type="submit"]{
+    width: auto;
+}
+textarea{
+    width: 170px;
+    height: 75px;
+    margin: 5px;
+}

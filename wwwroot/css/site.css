@@ -1,0 +1,51 @@
+/*Write all of your CSS here*/
+body{
+    font-family: Arial;
+}
+
+form{
+    text-align: right;
+    padding: 10px;
+    width: 350px;
+}
+
+form h3{
+    text-align: left;
+}
+
+form input{
+    margin: 5px;
+}
+
+.field-validation-error{
+    display: block;
+}
+
+#header{
+    border-bottom: 2px solid black;
+}
+
+table, th, td{
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+table{
+    margin: 10px;
+}
+
+th, td{
+    padding: 5px;
+}
+
+.inlineblock{
+    display: inline-block;
+}
+
+.floatright{
+    float: right;
+}
+
+.floatleft{
+    float: left;
+}

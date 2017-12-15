@@ -1,0 +1,40 @@
+@using System.Linq;
+@using System.Collections.Generic;
+@using DojoActivities.Models;
+@{
+    ViewData["Title"] = ViewBag.Activity.Title;
+}
+<div id="header">
+    <h1 class="inlineblock">Dojo Activity Center</h1>
+    <span class="floatright"><a href="/dashboard">Home</a> | <a href="/logout">Logout</a></span>
+</div>
+<span><h2>@ViewBag.Activity.Title</h2> 
+@{
+    if(ViewBag.CurrUser == ViewBag.Activity.CreatorId)
+    {
+        <a href="/delete/@ViewBag.Activity.ActivityId" class="floatright"><button>Delete</button></a>
+    }
+    else if(((List<Signup>)(ViewBag.Activity.Signedup)).Count() != 0)
+    {
+        if(((List<Signup>)(ViewBag.Activity.Signedup)).Where(su => su.UserId == ViewBag.CurrUser).Count() != 0)
+        {
+            <a href="/leave/@ViewBag.Activity.ActivityId" class="floatright"><button>Leave</button></a>
+        }
+    }
+    else
+    {
+        <a href="/join/@ViewBag.Activity.ActivityId" class="floatright"><button>Join</button></a>
+    }
+}
+</span>
+<p>Event Coordinator: @ViewBag.Activity.Creator.FirstName</p>
+<p>Description: @ViewBag.Activity.Description</p>
+<p>Participants:</p>
+<ul>
+    @{
+        foreach(DojoActivities.Models.Signup su in ViewBag.Activity.Signedup)
+        {
+            <li>@su.User.FirstName</li>
+        }
+    }
+</ul>

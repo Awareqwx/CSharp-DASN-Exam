@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "New Activity";
+}
+<link rel="stylesheet" href="~/css/newActivity.css" />
+<div id="header">
+    <h1 class="inlineblock">Dojo Activity Center</h1>
+    <span class="floatright"><a href="/dashboard">Home</a> | <a href="/logout">Logout</a></span>
+</div>
+<h2>Create an Activity!</h2>
+@model DojoActivities.Models.ViewActivity
+<form asp-controller="Activity" asp-action="CreateActivity" method="post">
+    <span asp-validation-for="Title" ></span>
+    <label asp-for="Title" class="floatleft">Title: </label>
+    <input asp-for="Title"/><br/>
+    <span asp-validation-for="Time" ></span>
+    <label asp-for="Time" class="floatleft">Time: </label>
+    <input asp-for="Time"/><br/>
+    <span asp-validation-for="Date" ></span>
+    <label asp-for="Date" class="floatleft">Date: </label>
+    <input asp-for="Date"/><br/>
+    <span asp-validation-for="Duration" ></span>
+    <label asp-for="Duration" class="floatleft">Duration: </label>
+    <input asp-for="Duration"/>
+    <select name="DurationType">
+        <option value="Days">Days</option>
+        <option value="Hours">Hours</option>
+        <option value="Minutes">Minutes</option>
+    </select>
+    <span asp-validation-for="Description"></span>
+    <label asp-for="Description" class="floatleft">Description: </label>
+    <textarea name="Description"></textarea><br/>
+    <input type="submit" value="Create Activity">
+</form>

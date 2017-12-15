@@ -1,0 +1,53 @@
+@using System.Linq;
+@using System.Collections.Generic;
+@using DojoActivities.Models;
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<div id="header">
+    <h1 class="inlineblock">Dojo Activity Center</h1>
+    <span class="floatright"><h4 class="inlineblock">Welcome, @ViewBag.CurrentUser.FirstName</h4> | <a href="/logout">Logout</a></span>
+</div>
+<table>
+    <tr>
+        <th>Activity</th>
+        <th>Date and Time</th>
+        <th>Duration</th>
+        <th>Event Coordinator</th>
+        <th>Number of Participants</th>   
+        <th>Actions</th>
+    </tr>
+    @{
+        foreach(Activity activity in ViewBag.AllActivities)
+        {
+            <tr>
+                <td><a href="/show/@activity.ActivityId">@activity.Title</a></td>
+                <td>@activity.TimeAndDate</td>
+                <td>@activity.Duration @activity.DurationType.ToString();</td>
+                <td>@activity.Creator.FirstName</td>
+                <td>@activity.Signedup.Count</td>
+                @if(ViewBag.CurrUser == activity.CreatorId)
+                {
+                    <td><a href="/delete/@activity.ActivityId">Delete</a></td>
+                }
+                else if(((List<Signup>)(activity.Signedup)).Count() != 0)
+                {
+                    if(((List<Signup>)(activity.Signedup)).Where(su => su.UserId == ViewBag.CurrUser).Count() != 0)
+                    {
+                        <td><a href="/Leave/@activity.ActivityId">Leave</a></td>
+                    }
+                    else
+                    {
+                        <td><a href="/Join/@activity.ActivityId">Join</a></td>
+                    }
+                }
+                else
+                {
+                    <td><a href="/Join/@activity.ActivityId">Join</a></td>
+                }
+            </tr>
+        }
+    }
+</table>
+    <a href="/newactivity"><button>Add New Activity!</button></a>
+<h1></h1>
